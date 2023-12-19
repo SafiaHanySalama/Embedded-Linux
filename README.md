@@ -62,3 +62,29 @@ Create Objdump file to see the symbol table (It must have UND for function calls
 ```http
   objdump -T calc > dynamic.objdump
 ```
+
+## Commands for Static Library
+
+Creat Directories and files as previous in Dynamic
+
+Create object files for each file.c 
+```http
+  gcc -c add.c sub.c mul.c mod.c div.c
+```
+Create a Static Library from this object codes
+```http
+  ar -rcs libstatic.a add.o sub.o mul.o mod.o div.o
+```
+### Note:
+
+r -> replace or insert file to archive
+
+c ->create new archive
+
+s -> add symbol table to archive
+
+Link the static library with main in calc excutable file
+```http
+  gcc main.c -lstatic -o calc.exe -I ./Include -L ./Lib
+```
+Use same commands as previous to check the symbol table
